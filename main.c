@@ -175,7 +175,7 @@ __interrupt void fnc_timer()
 	TA0CTL &= ~TAIFG; // reset flag
 
  	// Compute the actual speed using Hall effect sensors' output
-	sensor = (cmpt1+cmpt2)/(12.f*DT); // tour par secondes
+	sensor = (cmpt1+cmpt2)/(12.f*DT); // rotation per second
 
 	// Reset counters
 	cmpt1=0;
@@ -198,7 +198,7 @@ __interrupt void fnc_timer()
 	TA1CCR1 = PWM_MAX*pid_result;
 
 	// Integral's term desaturation
-	accu += pid_result + pid_result - pid_unsaturated;
+	accu += pid_result - pid_unsaturated;
 }
 
 /*
